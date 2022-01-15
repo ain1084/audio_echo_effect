@@ -1,0 +1,10 @@
+/.recovery
+/.setting.ini
+/.run_manager.ini
+/.spread_sheet.ini
+/.spreadsheet_view.ini
+/reportview.xml
+/promote.xml
+/impl1
+*.html
+*.vcd
