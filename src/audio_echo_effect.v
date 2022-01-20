@@ -2,58 +2,65 @@
 
 module audio_echo_effect #(parameter audio_width = 16, delay_samples = 1024)(
     input wire reset,
-	input wire clk256,
-    input wire sclk,
-    input wire lrclk,
-    input wire sdin,
-    output wire spdif);
+    input wire clk,
+    input wire i_valid,
+    output wire i_ready,
+    input wire i_is_left,
+    input wire [audio_width-1:0] i_audio,
+    output wire o_valid,
+    input wire o_ready,
+    output wire o_is_left,
+    output wire [audio_width-1:0] o_audio);
 
-    wire decoder_valid;
-    wire decoder_ready;
-    wire decoder_is_left;
-    wire [audio_width-1:0] decoder_audio;
-	wire is_error;
-    serial_audio_decoder #(.audio_width(audio_width)) decoder_(
-        .sclk(sclk),
+    wire parallelizer_valid;
+    wire parallelizer_ready;
+    wire [audio_width-1:0] parallelizer_left;
+    wire [audio_width-1:0] parallelizer_right;
+    stereo_audio_parallelizer #(.audio_width(audio_width)) parallelizer_(
         .reset(reset),
-        .lrclk(lrclk),
-        .sdin(sdin),
-        .is_i2s(1'b1),
-        .lrclk_polarity(1'b0),
-        .is_error(is_error),
-        .o_valid(decoder_valid),
-        .o_ready(decoder_ready),
-        .o_is_left(decoder_is_left),
-        .o_audio(decoder_audio)
+        .clk(clk),
+        .i_valid(i_valid),
+        .i_ready(i_ready),
+        .i_is_left(i_is_left),
+        .i_audio(i_audio),
+        .o_valid(parallelizer_valid),
+        .o_ready(parallelizer_ready),
+        .o_left(parallelizer_left),
+        .o_right(parallelizer_right)
     );
 
-    wire echo_valid;
-    wire echo_ready;
-    wire echo_is_left;
-    wire [audio_width-1:0] echo_audio;
-    sample_echo #(.audio_width(audio_width), .delay_samples(delay_samples)) echo_(
-        .reset(reset | is_error),
-        .clk(sclk),
-        .i_valid(decoder_valid),
-        .i_ready(decoder_ready),
-        .i_is_left(decoder_is_left),
-        .i_audio(decoder_audio),
-        .o_valid(echo_valid),
-        .o_ready(echo_ready),
-        .o_is_left(echo_is_left),
-        .o_audio(echo_audio)
+    wire processor_valid;
+    wire processor_ready;
+    wire [audio_width-1:0] processor_left;
+    wire [audio_width-1:0] processor_right;
+    sample_processor #(.audio_width(audio_width), .delay_samples(delay_samples)) processor_(
+        .reset(reset),
+        .clk(clk),
+        .i_valid(parallelizer_valid),
+        .i_ready(parallelizer_ready),
+        .i_left(parallelizer_left),
+        .i_right(parallelizer_right),
+        .o_valid(processor_valid),
+        .o_ready(processor_ready),
+        .o_left(processor_left),
+        .o_right(processor_right)
     );
 
-    spdif_audio_encoder #(.audio_width(audio_width)) encoder_ (
+    wire serializer_valid;
+    wire serializer_ready;
+    wire serializer_is_left;
+    wire [audio_width-1:0] serializer_audio;
+    stereo_audio_serializer #(.audio_width(audio_width)) stereo_audio_serializer_(
         .reset(reset),
-        .clk(sclk),
-        .clk256(clk256),
-        .i_valid(echo_valid),
-        .i_ready(echo_ready),
-        .i_audio(echo_audio),
-        .i_is_left(echo_is_left),
-        .i_is_error(is_error),
-        .spdif(spdif)
+        .clk(clk),
+        .i_valid(processor_valid),
+        .i_ready(processor_ready),
+        .i_left(processor_left),
+        .i_right(processor_right),
+        .o_valid(o_valid),
+        .o_ready(o_ready),
+        .o_is_left(o_is_left),
+        .o_audio(o_audio)
     );
 
 endmodule

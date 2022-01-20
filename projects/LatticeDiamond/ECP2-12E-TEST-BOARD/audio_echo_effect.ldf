@@ -9,9 +9,6 @@
         <Source name="../../../src/sample_delay_buffer.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
-        <Source name="../../../src/sample_echo.v" type="Verilog" type_short="Verilog">
-            <Options/>
-        </Source>
         <Source name="../../../src/sample_processor.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
