@@ -29,6 +29,11 @@ module audio_echo_effect #(parameter audio_width = 16, delay_samples = 1024)(
         .o_right(parallelizer_right)
     );
 
+    wire processor_valid = parallelizer_valid;
+    wire processor_ready = parallelizer_ready;
+    wire [audio_width-1:0] processor_left = parallelizer_left;
+    wire [audio_width-1:0] processor_right = parallelizer_right;
+/*
     wire processor_valid;
     wire processor_ready;
     wire [audio_width-1:0] processor_left;
@@ -45,7 +50,7 @@ module audio_echo_effect #(parameter audio_width = 16, delay_samples = 1024)(
         .o_left(processor_left),
         .o_right(processor_right)
     );
-
+*/
     wire serializer_valid;
     wire serializer_ready;
     wire serializer_is_left;
