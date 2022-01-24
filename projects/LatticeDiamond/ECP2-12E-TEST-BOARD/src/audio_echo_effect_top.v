@@ -45,8 +45,8 @@ module audio_echo_effect_top(
     // Synchronize sclk to clk domain
     wire decoder_sync_ready;
     wire decoder_sync_valid;
-    wire [audio_width-1:0] decoder_sync_audio;
     wire decoder_sync_is_left;
+    wire [audio_width-1:0] decoder_sync_audio;
     dual_clock_buffer #(.width(audio_width + 1)) decoder_sync_ (
         .reset(reset_with_error),
         .i_clk(sclk),
@@ -83,6 +83,7 @@ module audio_echo_effect_top(
         .clk256(clk256),
         .i_valid(echo_valid),
         .i_ready(echo_ready),
+        .i_is_left(echo_is_left),
         .i_audio(echo_audio),
         .spdif(spdif)
     );

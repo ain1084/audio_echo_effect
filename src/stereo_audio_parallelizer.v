@@ -29,7 +29,7 @@ module stereo_audio_parallelizer #(parameter audio_width = 32)(
                     o_right <= i_audio;
                     i_ready <= 1'b0;
                 end
-            end if (o_valid) begin
+            end else if (o_valid) begin
                 i_ready <= o_ready;
             end
         end
