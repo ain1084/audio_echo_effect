@@ -21,17 +21,16 @@ module stereo_audio_parallelizer #(parameter audio_width = 32)(
             o_left <= 0;
             o_right <= 0;
         end else begin
-            if (i_ready && i_valid) begin
-                if (i_is_left) begin
-                    o_left <= i_audio;
-                    i_ready <= 1'b1;
-                end else begin
-                    o_right <= i_audio;
-                    i_ready <= 1'b0;
+            if (i_ready) begin
+                if (i_valid) begin
+                    if (i_is_left)
+                        o_left <= i_audio;
+                    else
+                        o_right <= i_audio;
+                    i_ready <= i_is_left;
                 end
-            end else if (o_valid) begin
+            end else
                 i_ready <= o_ready;
-            end
         end
     end
 endmodule
