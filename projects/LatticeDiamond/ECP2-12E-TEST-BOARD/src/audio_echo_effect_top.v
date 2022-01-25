@@ -1,7 +1,6 @@
 `default_nettype none
 
 module audio_echo_effect_top(
-    input wire nreset,
     input wire sclk,
     input wire lrclk,
     input wire sdin,
@@ -11,9 +10,9 @@ module audio_echo_effect_top(
     localparam audio_width = 16;
     localparam delay_samples = 2048;
 
-    wire reset = !nreset;
-    GSR GSR_INST(
-        .GSR(reset)
+    wire reset;
+    PUR PUR_INST(
+        .PUR(reset)
     );
 
     wire clk;
