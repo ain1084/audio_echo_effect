@@ -30,16 +30,13 @@
         <Source name="../../../src/serial_audio_decoder/serial_audio_decoder.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
-        <Source name="../../../src/spdif_encoder/spdif_bmc_encoder.v" type="Verilog" type_short="Verilog">
-            <Options/>
-        </Source>
-        <Source name="../../../src/spdif_encoder/spdif_frame_encoder.v" type="Verilog" type_short="Verilog">
-            <Options/>
-        </Source>
-        <Source name="../../../src/spdif_encoder/spdif_sub_frame_encoder.v" type="Verilog" type_short="Verilog">
-            <Options/>
-        </Source>
         <Source name="src/audio_echo_effect_top.v" type="Verilog" type_short="Verilog">
+            <Options top_module="audio_echo_effect_top"/>
+        </Source>
+        <Source name="../../../src/spdif_frame_encoder/spdif_bmc_encoder.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/spdif_frame_encoder/spdif_frame_encoder.v" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
         <Source name="audio_echo_effect.lpf" type="Logic Preference" type_short="LPF">
