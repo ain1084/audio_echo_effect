@@ -34,7 +34,7 @@ module spdif_audio_encoder #(parameter audio_width = 16)(
     spdif_frame_encoder #(.audio_width(audio_width)) encoder_ (
         .clk128(clk128),
         .reset(reset),
-        .sub_frame_number(),
+        .next_sub_frame_number(),
         .i_valid(o_valid),
         .i_ready(o_ready),
         .i_is_left(o_is_left),

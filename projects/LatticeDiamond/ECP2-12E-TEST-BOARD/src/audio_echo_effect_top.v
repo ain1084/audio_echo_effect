@@ -16,7 +16,7 @@ module audio_echo_effect_top(
     );
 
     wire clk;
-    OSCD #(.NOM_FREQ("10.0")) OSC_INST(
+    OSCD #(.NOM_FREQ("20.0")) OSC_INST(
         .CFGCLK(clk)
     );
 
@@ -58,7 +58,7 @@ module audio_echo_effect_top(
         .o_data({ decoder_sync_is_left, decoder_sync_audio })
     );
 
-    // Process (echo)
+	// Process (echo)
     wire echo_valid;
     wire echo_ready;
     wire echo_is_left;
