@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RadiantProject version="4.2" title="LIFCL40EVN" device="LIFCL-40-9BG400C" performance_grade="9_High-Performance_1.0V" default_implementation="impl_1">
+    <Options/>
+    <Implementation title="impl_1" dir="impl_1" description="impl_1" synthesis="lse" default_strategy="Strategy1">
+        <Options top="audio_echo_effect_top"/>
+        <Source name="impl_1/audio_echo_effect_top.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/audio_echo_effect.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/sample_delay_buffer.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/sample_processor.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/single_port_ram.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/spdif_audio_encoder.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/stereo_audio_parallelizer.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/stereo_audio_serializer.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/dual_clock_buffer/dual_clock_buffer.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/serial_audio_decoder/serial_audio_decoder.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/spdif_frame_encoder/spdif_bmc_encoder.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../src/spdif_frame_encoder/spdif_frame_encoder.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="impl_1/constraint.pdc" type="Physical Constraints File" type_short="PDC">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="LIFCL40EVN1.sty"/>
+</RadiantProject>
